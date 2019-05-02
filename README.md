@@ -6,7 +6,7 @@ This repository contains the code which you are going to work with over the cour
 If you forget adding the flag when cloning, you can run
 >`git submodule init`
 
->`git submodule update --recursive --remote`
+>`git submodule update --remote`
 
 from within your local repository root later on.
 
