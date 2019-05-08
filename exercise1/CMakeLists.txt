@@ -23,7 +23,7 @@ target_link_libraries(${COURSE_NAME}_exercise1 ${OPENGL_LIBRARIES} ${cgv_LIBRARI
 cgv_test_shaders(${COURSE_NAME}_exercise1 ${SHADER_SOURCES})
 set_target_properties(${COURSE_NAME}_exercise1 PROPERTIES FOLDER "${FOLDER_NAME_APPLICATION_PLUGINS}")
 
-set_target_properties(${COURSE_NAME}_exercise1 PROPERTIES VS_DEBUGGER_COMMAND_ARGUMENTS "plugin:cg_fltk type(shader_config):shader_path='${CGV_DIR}/libs/cgv_gl/glsl' plugin:cg_icons plugin:crg_stereo_view plugin:${COURSE_NAME}_exercise1 config:${CMAKE_CURRENT_SOURCE_DIR}/config.def")
+set_target_properties(${COURSE_NAME}_exercise1 PROPERTIES VS_DEBUGGER_COMMAND_ARGUMENTS "plugin:cg_fltk type(shader_config):shader_path='${CGV_DIR}/libs/cgv_gl/glsl' plugin:cg_icons plugin:cg_ext plugin:cmi_io plugin:crg_stereo_view plugin:${COURSE_NAME}_exercise1 config:${CMAKE_CURRENT_SOURCE_DIR}/config.def")
 set_target_properties(${COURSE_NAME}_exercise1 PROPERTIES VS_DEBUGGER_COMMAND $<IF:$<CONFIG:Debug>,${VIEWER_DEBUG_EXE},${VIEWER_EXE}>)
 
 cgv_write_find_file(${COURSE_NAME}_exercise1)
