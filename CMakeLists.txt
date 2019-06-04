@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 set(COURSE_NAME "CG2")
-project(${COURSE_NAME})
+project(${COURSE_NAME} C CXX)
 
 
 # Add CGV framework
@@ -34,6 +34,7 @@ get_filename_component(FINAL_BUILD_BIN_DIR ${VIEWER_EXE} DIRECTORY)
 # Add exercises
 add_subdirectory(exercise1)
 add_subdirectory(exercise2)
+add_subdirectory(exercise45)
 
 # Launch configurations for various IDEs that are not Visual Studio
 # - VS Code
@@ -41,16 +42,16 @@ file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/.vscode)
 configure_file(${CMAKE_SOURCE_DIR}/CMake/Templates/launch.json.in ${CMAKE_SOURCE_DIR}/.vscode/launch.json @ONLY)
 # - pure Unix
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tmp)
-foreach(EXERCISE_ID 1 2)
+foreach(EXERCISE_ID "1" "2" "45")
 if(${EXERCISE_ID} EQUAL 2)
 	set(EXTRA_PLUGINS "plugin:crg_grid plugin:crg_light")
 	set(EXTRA_PLUGINS_DEBUG "pplugin:crg_grid_d plugin:crg_light_d")
 	set(EXTRA_ARGS "")
-else(${EXERCISE_ID} EQUAL 2)
+else()
 	set(EXTRA_PLUGINS "")
 	set(EXTRA_PLUGINS_DEBUG "")
 	set(EXTRA_ARGS "")
-endif(${EXERCISE_ID} EQUAL 2)
+endif()
 configure_file(${CMAKE_SOURCE_DIR}/CMake/Templates/run.sh.in ${CMAKE_BINARY_DIR}/tmp/run${EXERCISE_ID}.sh @ONLY)
 configure_file(${CMAKE_SOURCE_DIR}/CMake/Templates/debug.sh.in ${CMAKE_BINARY_DIR}/tmp/debug${EXERCISE_ID}.sh @ONLY)
 file(COPY
