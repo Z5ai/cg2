@@ -110,14 +110,14 @@ private:
 
 	//Calculated attributes
 	//Transform directions are specified for model transforms (system transforms are in the opposite direction)
-	Mat4 orientationTransformPrevJointToCurrent; //Rotation matrix that transforms from the previous bone to the current bone (in the previous bone's coordinate system); Task 2.1
-	Mat4 translationTransformCurrentJointToNext; //Translation matrix that transforms from the current bone to the next bone (in the current bone's coordinate system); Task 2.1
+	Mat4 orientationTransformPrevJointToCurrent; //Rotation matrix that transforms from the previous bone to the current bone (in the previous bone's coordinate system); Task 4.1
+	Mat4 translationTransformCurrentJointToNext; //Translation matrix that transforms from the current bone to the next bone (in the current bone's coordinate system); Task 4.1
 	Mat4 orientationTransformGlobalToLocal; //Rotation matrix that transforms from the global coordinate system to the current bone's local system. Available from the beginning.
 	Mat4 orientationTransformLocalToGlobal; //Rotation matrix that transforms from the current bone's local system to the global coordinate system. Available from the beginning.
 	//for skinning:
-	Mat4 translationTransformGlobalToLocal; //Translation matrix that transforms from the global coordinate system to the bone's local system. Task 4.6
-	Mat4 transformGlobalToLocal; //Combined rotation and translation that transforms from the global coordinate system to the bone's local system. Task 4.6
-	Mat4 transformLocalToGlobal;//Combined rotation and translation that transforms from the bone's local coordinate system to the global system. Task 4.6
+	Mat4 translationTransformGlobalToLocal; //Translation matrix that transforms from the global coordinate system to the bone's local system. Task 5.6
+	Mat4 transformGlobalToLocal; //Combined rotation and translation that transforms from the global coordinate system to the bone's local system. Task 5.6
+	Mat4 transformLocalToGlobal;//Combined rotation and translation that transforms from the bone's local coordinate system to the global system. Task 5.6
 
 	int translationTransforms; //The number of translation transforms that have been added as dof
 };
