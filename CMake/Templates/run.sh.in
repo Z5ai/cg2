@@ -1,3 +1,0 @@
-#!/bin/sh
-cd @CMAKE_SOURCE_DIR@
-@VIEWER_EXE@ plugin:cg_fltk "type(shader_config):shader_path='@CMAKE_SOURCE_DIR@/framework/libs/cgv_gl/glsl'" plugin:cg_icons plugin:cg_ext plugin:cmi_io @EXTRA_PLUGINS@ plugin:crg_stereo_view plugin:@COURSE_NAME@_exercise@EXERCISE_ID@ config:@CMAKE_SOURCE_DIR@/exercise@EXERCISE_ID@/config.def @EXTRA_ARGS@

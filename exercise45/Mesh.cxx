@@ -15,7 +15,7 @@
 bool Mesh::init_shaders(cgv::render::context& ctx)
 {
 	cgv::render::shader_code vs, fs, gs;
-	if (!vs.read_and_compile(ctx, "glsl/skinning.glvs", cgv::render::ST_VERTEX)) {
+	if (!vs.read_and_compile(ctx, "skinning.glvs", cgv::render::ST_VERTEX)) {
 		std::cout << "error reading vertex shader\n" << vs.last_error.c_str() << std::endl;
 		return false;
 	}
