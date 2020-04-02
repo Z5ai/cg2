@@ -1,4 +1,4 @@
 [submodule "framework"]
 	path = framework
-	url = https://github.com/brussig-tud/cgv.git
-	branch = master
+	url = https://github.com/sgumhold/cgv.git
+	branch = develop
