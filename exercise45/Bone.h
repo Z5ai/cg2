@@ -72,25 +72,25 @@ public:
 	void calculate_matrices();
 
 	//Calculates a matrix that transforms the parent's local coordinate system to the current bone's local coordinate system (model transform). 
-	//It includes all dofs of the bone. Implemented in task 2.1
+	//It includes all dofs of the bone. Implemented in task 4.1
 	Mat4 calculate_transform_prev_to_current_with_dofs();
 
 	//Calculates a matrix that transforms the parent's local coordinate system to the current bone's local coordinate system (model transform).
-	//It does not include any of the bone's dofs. Implemented in task 2.1.
+	//It does not include any of the bone's dofs. Implemented in task 4.1.
 	Mat4 calculate_transform_prev_to_current_without_dofs();
 
 	//Returns a matrix that represents a translation from the current bone to the next bone in the current bone's local coordinate system.
-	//Implemented in task 2.1.
+	//Implemented in task 4.1.
 	const Mat4& get_translation_transform_current_joint_to_next() const;
 
 	//Returns a matrix that represents a rotation from the previous bone to the current bone in the previous bone's local coordinate system.
-	//Implemented in task 2.1.
+	//Implemented in task 4.1.
 	const Mat4& get_orientation_transform_prev_joint_to_current() const;
 
 	//Returns the zero-vector (with w-component 1)
 	Vec4 get_bone_local_root_position() const;
 
-	//Returns the position of the bone's tip in the bone's coordinate system. Available after implementing task 2.1.
+	//Returns the position of the bone's tip in the bone's coordinate system. Available after implementing task 4.1.
 	Vec4 get_bone_local_tip_position() const;
 
 	//Returns the system transform that transforms positions from the global coordinate system to the bone's local coordinate system.
