@@ -94,7 +94,8 @@ bool Mesh::read_obj(const char* filename)
 	int n_indices = 0;
 	while (std::getline(f, line))
 	{
-		if (line.length() == 0 || line[0] == '#')
+		if (   line.length() == 0 || line[0] == '#'
+		    || (line[0] == 'v' && (line[1] == 'n' || line[1] == 't')))
 			continue;
 		else
 		{
