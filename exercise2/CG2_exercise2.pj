@@ -12,6 +12,6 @@ addProjectDeps=[
 ];
 addCommandLineArguments=[
 	'config:"'.INPUT_DIR.'/config.def"',
-	"type(shader_config):shader_path='".CGV_DIR."/libs/cgv_gl/glsl'"
+	after("type(shader_config):shader_path='".CGV_DIR."/libs/cgv_gl/glsl'","cg_fltk")
 ];
 workingDirectory = INPUT_DIR."/..";

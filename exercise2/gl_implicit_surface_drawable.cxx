@@ -217,9 +217,9 @@ void gl_implicit_surface_drawable::create_gui()
 		align("\b");
 	}
 
-	if (begin_tree_node("Visualization", wireframe)) {
+	if (begin_tree_node("Visualization", show_wireframe)) {
 		align("\a");
-		add_member_control(this, "&wireframe", wireframe, "check", "shortcut='W'");
+		add_member_control(this, "show_&wireframe", show_wireframe, "check", "shortcut='W'");
 		//add_member_control(this, "ambient", material.ref_ambient(), "color<float,RGBA>");
 		add_member_control(this, "diffuse", material.ref_diffuse_reflectance(), "color<float,RGBA>");
 		add_member_control(this, "specular", material.ref_specular_reflectance(), "color<float,RGBA>");
@@ -234,7 +234,7 @@ void gl_implicit_surface_drawable::create_gui()
 		add_member_control(this, "ix",ix,"value_slider", "min=0;max=10;ticks=true");
 		add_member_control(this, "iy",iy,"value_slider", "min=0;max=10;ticks=true");
 		add_member_control(this, "iz",iz,"value_slider", "min=0;max=10;ticks=true");
-		end_tree_node(wireframe);
+		end_tree_node(show_wireframe);
 		align("\b");
 	}
 }
@@ -251,7 +251,7 @@ bool gl_implicit_surface_drawable::self_reflect(cgv::reflect::reflection_handler
 		rh.reflect_member("ix", ix) &&
 		rh.reflect_member("iy", iy) &&
 		rh.reflect_member("iz", iz) &&
-		rh.reflect_member("wireframe", wireframe) &&
+		rh.reflect_member("show_wireframe", show_wireframe) &&
 		rh.reflect_member("show_sampling_grid", show_sampling_grid) &&
 		rh.reflect_member("show_sampling_locations", show_sampling_locations) &&
 		rh.reflect_member("show_box", show_box) &&
@@ -281,7 +281,7 @@ void gl_implicit_surface_drawable::on_set(void* p)
 		 p == &max_nr_iters || p == &normal_computation_type || p == &epsilon ||
 		 p == &grid_epsilon || (p >= &box && p < &box+1) )
 		   post_rebuild();
-	else if (p == &ix || p == &iy || p == &iz || p == &wireframe || p == &show_sampling_grid ||
+	else if (p == &ix || p == &iy || p == &iz || p == &show_wireframe || p == &show_sampling_grid ||
 	    p == &show_sampling_locations || p == &show_box || p == &show_mini_box || 
 		 p == &show_gradient_normals || p == &show_mesh_normals)
 			post_redraw();
