@@ -8,7 +8,7 @@ addProjectDeps=[
 	"cgv_viewer", "cg_fltk", "crg_stereo_view", "crg_light", "cgv_reflect_types"
 ];
 addCommandLineArguments=[
-	after("type(shader_config):shader_path='".CGV_DIR."/libs/cgv_gl/glsl'","cg_fltk"),
+	after("type(shader_config):shader_path='".CGV_DIR."/libs/cgv_gl/glsl;".INPUT_DIR."'","cg_fltk"),
 	'config:"'.INPUT_DIR.'/config.def"'
 ];
 workingDirectory = INPUT_DIR."/..";
