@@ -1,2 +1,3 @@
-show all
-name(main):show_stats=false
+
+// The UI theme: light, mid, dark, darkest, legacy
+type(fltk_viewer_window):theme=legacy

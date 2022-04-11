@@ -1,5 +1,6 @@
-show all
-name(main):show_stats=false
+
+// The UI theme: light, mid, dark, darkest, legacy
+type(fltk_viewer_window):theme=legacy
 
 // Make specular highlights more pronounced
 type(implicit_surface):material_roughness=0.2
