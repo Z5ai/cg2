@@ -12,8 +12,8 @@ from within your local repository root later on.
 
 ## Development environment
 
-Currently, the CGV Framework only supports building on Windows and Visual Studio. A CMake-based build system is included in the Framework repository, but it does not yet cover many of the newer modules and has to be considered pre-alpha at this point. Thus, no CMake build files are included in the exercise.
+The CGV Framework is cross-platform and supports Windows and Linux (MacOS is supported in theory, but completely untested and likely to not work without adjustments). For the exercise however, only building on Windows and Visual Studio is officially supported. CMake build files are included in the exercise and you are free to develop on the OS of your choice, but due to the vast multitude of different configurations and setups, we _cannot_ and _*will not*_ provide assistance if you encounter trouble building or running on anything other than Windows.
 
 ## Building the exercises
 
-Refer to the file HowToBuild.pdf in the repository root for illustrated instructions on how to setup the build environment and build the exercise code.
+Refer to the file HowToBuild.pdf in the repository root for illustrated instructions on how to set up the official Windows build environment and build the exercise code.
