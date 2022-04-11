@@ -17,3 +17,7 @@ The CGV Framework is cross-platform and supports Windows and Linux (MacOS is sup
 ## Building the exercises
 
 Refer to the file HowToBuild.pdf in the repository root for illustrated instructions on how to set up the official Windows build environment and build the exercise code.
+
+## Linux pointers
+
+To solve the exercise in a productive way under Linux, we do recommend using an IDE. Many current offerings (like the open source Visual Studio Code editor) support opening a CMake-enabled source tree directly. However, you will have to manually create the launch and debug configurations for your IDE of choice. The CMake files of the exercise will create shell scripts in the CMake build directory for launching each of the exercises, named `CG2_exercise1.sh`, `CG2_exercise2.sh` and `CG2_exercise45.sh`, respectively. You can inspect them to find out how to launch the `cgv_viewer` binary and provide it with the necessary command line arguments for each exercise, which you can then adapt for your IDE.
