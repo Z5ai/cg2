@@ -1,6 +1,6 @@
 
 // The UI theme: light, mid, dark, darkest, legacy
-type(fltk_viewer_window):theme=legacy
+type(fltk_viewer_window):theme=dark
 
 // Demo settings
 type(cgv_demo):text="Hallo Welt"
@@ -13,6 +13,12 @@ type(cgv_demo):draw_backside=true
 /// Task 1.1: Set the custom tesselation of the quad to be used initially by cgv_demo via
 ///           your reflected property.
 
-
+type(cgv_demo):tesselate=false
 
 /// Task 1.2: Set appropriate values for your drawable that renders the cube fractal.
+
+type(cubes_drawable):recursion_depth=4
+type(cubes_drawable):cube_color_r=0.5
+type(cubes_drawable):cube_color_g=0.8
+type(cubes_drawable):cube_color_b=0.2
+type(cubes_drawable):rendering_mode=0

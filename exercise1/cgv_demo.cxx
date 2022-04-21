@@ -23,6 +23,7 @@
 // Framework standard plugins
 #include <cgv_gl/gl/gl.h>
 
+
 // Some constant symbols
 #define FB_MAX_RESOLUTION 2048
 
@@ -72,6 +73,8 @@ protected:
 
 	// < your code here >
 
+	bool useCustomTesselation;
+
 	/// [END] Task 1.1
 	/// ********************************************************************************/
 
@@ -113,7 +116,7 @@ public:
 		  )),
 		  texture("uint8[R,G,B,A]", cgv::render::TF_LINEAR, cgv::render::TF_LINEAR),
 		  fb_bgcolor_r(0.9f), fb_bgcolor_g(0.9f), fb_bgcolor_b(0.9f),
-		  bgcolor(fb_bgcolor_r, fb_bgcolor_g, fb_bgcolor_b), draw_backside(true)
+		  bgcolor(fb_bgcolor_r, fb_bgcolor_g, fb_bgcolor_b), draw_backside(true), useCustomTesselation(false)
 	{}
 
 	// Should be overwritten to sensibly implement the cgv::base::named interface
@@ -143,7 +146,9 @@ public:
 			rh.reflect_member("fb_bgcolor_r", fb_bgcolor_r) &&
 			rh.reflect_member("fb_bgcolor_g", fb_bgcolor_g) &&
 			rh.reflect_member("fb_bgcolor_b", fb_bgcolor_b) &&
-			rh.reflect_member("draw_backside", draw_backside);
+			rh.reflect_member("draw_backside", draw_backside) &&
+			rh.reflect_member("tesselate", useCustomTesselation);
+
 	}
 
 	// Part of the cgv::base::base interface, should be implemented to respond to write
@@ -333,6 +338,8 @@ public:
 
 		// < Your code here >
 
+		add_member_control(this, "custom tesselation", useCustomTesselation);
+
 		/// [END] Task 1.1
 		///*****************************************************************************/
 	}
@@ -474,8 +481,11 @@ public:
 				///           instead of using tesselate_unit_square(). You can invoke
 				///           the method draw_my_unit_square() for this.
 
-				ctx.tesselate_unit_square();
 
+			if (!useCustomTesselation)
+				ctx.tesselate_unit_square();
+			else
+				draw_my_unit_square(ctx);
 				/// ********************************************************************/
 
 				// Draw back side
