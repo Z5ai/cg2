@@ -32,6 +32,8 @@ struct sphere : public implicit_primitive<T>
 
 		// Task 2.1a: Return the gradient of the function at p.
 
+		grad_f_p.set(2 * p.x(), 2 * p.y(), 2 * p.z());
+
 		return grad_f_p;
 	}
 

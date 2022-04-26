@@ -32,6 +32,8 @@ struct cylinder :  public implicit_primitive<T>
 
 		// Task 2.1a: Return the gradient of the function at p.
 
+		grad_f_p.set(p.x(), p.y(), 0);
+
 		return grad_f_p;
 	}
 
