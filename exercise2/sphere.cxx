@@ -20,6 +20,8 @@ struct sphere : public implicit_primitive<T>
 		// Task 2.1a: Implement an algebraic function of p that evaluates to 0 on the
 		//            unit sphere.
 
+		f_p = p.x()*p.x() + p.y()*p.y() + p.z()*p.z() - 1;
+
 		return f_p;
 	}
 

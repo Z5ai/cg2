@@ -28,6 +28,8 @@ struct box : public implicit_primitive<T>
 		// Task 2.1a: Implement a function of p that evaluates to 0 on the unit cube.
 		//            You may use any suitable distance metric.
 
+		f_p = std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) - 1;
+
 		return f_p;
 	}
 
