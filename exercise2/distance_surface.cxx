@@ -20,7 +20,14 @@ typename distance_surface<T>::vec_type distance_surface<T>::get_edge_distance_ve
 	vec_type v;
 
 	// Task 2.2: Compute the distance vector from edge i to p.
+    auto e = skeleton<T>::edges.at(i);
+    pnt_type e_a = knot_vector<T>::points.at(e.first);
+    pnt_type e_b = knot_vector<T>::points.at(e.second);
+    vec_type e_v(e_a.x()-e_b.x(), e_a.y()-e_b.y(), e_a.z()-e_b.z());
+    double e_l = length(e_v);
 
+    pnt_type p_proj = e_a + ((p-e_a)*e_v)/(e_l*e_l);
+    v.set(p.x()-p_proj.x(), p.y()-p_proj.y() ,p.z()-p_proj.z());
 	return v;
 }
 
