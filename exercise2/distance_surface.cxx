@@ -38,8 +38,21 @@ double distance_surface<T>::get_min_distance_vector (const pnt_type &p, vec_type
 
 	// Task 2.2: Compute the minimum distance from the skeleton to p, and report the
 	//           corresponding distance vector in v.
+    v = get_edge_distance_vector(0,p);
+    min_dist = length(v);
 
-	return min_dist;
+    double min_dist_temp;
+    vec_type v_temp;
+    for(int i=1; i<skeleton<T>::edges.size(); i++) {
+        v_temp = get_edge_distance_vector(i, p);
+        min_dist_temp = length(v_temp);
+        if(min_dist_temp<min_dist){
+            v = v_temp;
+            min_dist = min_dist_temp;
+        }
+    }
+
+    return min_dist;
 }
 
 template <typename T>
@@ -48,6 +61,8 @@ T distance_surface<T>::evaluate(const pnt_type& p) const
 	double f_p = std::numeric_limits<double>::infinity();
 
 	// Task 2.2: Evaluate the distance surface function at p.
+    vec_type v;
+    f_p = get_min_distance_vector(p, v) - r;
 
 	return f_p;
 }
@@ -58,6 +73,9 @@ typename distance_surface<T>::vec_type distance_surface<T>::evaluate_gradient(co
 	vec_type grad_f_p(0, 0, 0);
 
 	// Task 2.2: Return the gradient of the distance surface function at p.
+    vec_type v;
+    get_min_distance_vector(p, v);
+    grad_f_p.set(v.x() ,v.y() ,v.z());
 
 	return grad_f_p;
 }
