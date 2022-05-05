@@ -21,13 +21,32 @@ typename distance_surface<T>::vec_type distance_surface<T>::get_edge_distance_ve
 
 	// Task 2.2: Compute the distance vector from edge i to p.
     auto e = skeleton<T>::edges.at(i);
-    pnt_type e_a = knot_vector<T>::points.at(e.first);
-    pnt_type e_b = knot_vector<T>::points.at(e.second);
-    vec_type e_v(e_a.x()-e_b.x(), e_a.y()-e_b.y(), e_a.z()-e_b.z());
+    pnt_type begin = knot_vector<T>::points.at(e.first);
+    pnt_type end = knot_vector<T>::points.at(e.second);
+    vec_type e_v(begin.x() - end.x(), begin.y() - end.y(), begin.z() - end.z());
     double e_l = length(e_v);
+    pnt_type proj = begin + (((p - begin) * e_v) * e_v) / (e_l * e_l);
 
-    pnt_type p_proj = e_a + ((p-e_a)*e_v)/(e_l*e_l);
-    v.set(p.x()-p_proj.x(), p.y()-p_proj.y() ,p.z()-p_proj.z());
+    bool proj_on_edge_x = (begin.x() <= proj.x() && proj.x() <= end.x()) || (end.x() <= proj.x() && proj.x() <= begin.x());
+    bool proj_on_edge_y = (begin.y() <= proj.y() && proj.y() <= end.y()) || (end.y() <= proj.y() && proj.y() <= begin.y());
+    bool proj_on_edge_z = (begin.z() <= proj.z() && proj.z() <= end.z()) || (end.z() <= proj.z() && proj.z() <= begin.z());
+
+    if(proj_on_edge_x && proj_on_edge_y && proj_on_edge_z){
+        v.set(p.x() - proj.x(), p.y() - proj.y() , p.z() - proj.z());
+    }
+    else{
+        vec_type v_a;
+        vec_type v_b;
+        v_a.set(p.x() - begin.x(), p.y() - begin.y(), p.z() - begin.z());
+        v_b.set(p.x() - end.x(), p.y() - end.y(), p.z() - end.z());
+        if(length(v_a)<length(v_b)){
+            v = v_a;
+        }
+        else{
+            v = v_b;
+        }
+    }
+
 	return v;
 }
 
