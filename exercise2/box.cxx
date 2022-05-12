@@ -42,19 +42,26 @@ struct box : public implicit_primitive<T>
 
 		int x_grad=0, y_grad=0, z_grad=0;
 
-		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == p.x()) {
-			if (p.x()-1 > 0) { x_grad = 1; }
-			else{x_grad = -1;}
+		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == std::abs(p.x())) {
+			x_grad = 1;
+			if (p.x() < 0) {
+				x_grad = -1;
+			}
 		}
-		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == p.y()) {
-			if (p.y()-1 > 0) { y_grad = 1; }
-			else { y_grad = -1; }
+		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == std::abs(p.y())) {
+			y_grad = 1;
+			if (p.y() < 0) {
+				y_grad = -1;
+			}
 		}
-		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == p.z()) {
-			if (p.z()-1 > 0) { z_grad = 1; }
-			else { z_grad = -1; }
+		if (std::max(std::abs(p.x()), std::max(std::abs(p.y()), std::abs(p.z()))) == std::abs(p.z())) {
+			z_grad = 1;
+			if (p.z() < 0) {
+				z_grad = -1;
+			}
 		}
 
+		
 		grad_f_p.set(x_grad, y_grad, z_grad);
 
 		return grad_f_p;
