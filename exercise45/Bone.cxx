@@ -37,6 +37,10 @@ void Bone::calculate_matrices()
 	////
 	// Task 4.1: Implement matrix calculation
 
+    translationTransformCurrentJointToNext.identity();
+    Vec4 translationVector;
+    translationVector.set(length*direction_in_world_space.x(),length*direction_in_world_space.y(), length*direction_in_world_space.z(),1);
+    translationTransformCurrentJointToNext.set_col(3,translationVector);
 
 
 	////
