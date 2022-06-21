@@ -40,10 +40,10 @@ void Bone::calculate_matrices()
     translationTransformCurrentJointToNext.identity();
     Vec4 translationVector;
     translationVector.set(length*direction_in_world_space.x(),length*direction_in_world_space.y(), length*direction_in_world_space.z(),1);
-    translationTransformCurrentJointToNext.set_col(3,translationVector);
+    translationTransformCurrentJointToNext.set_col(3, translationVector);
 
     if(this->get_parent() != NULL)
-            orientationTransformPrevJointToCurrent = this->get_parent()->orientationTransformLocalToGlobal * orientationTransformGlobalToLocal;
+        orientationTransformPrevJointToCurrent = this->get_parent()->orientationTransformLocalToGlobal * orientationTransformGlobalToLocal;
 
 	////
 	// Task 5.6: Implement matrix calculation (skinning)

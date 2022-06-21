@@ -33,6 +33,11 @@ void SkeletonViewer::draw_skeleton_subtree(Bone* node, const Mat4& global_to_par
 {
 	////
 	// Task 4.2, 4.3: Visualize the skeleton
+	Vec3 start(cgv::math::inv(global_to_parent_local).col(3));
+	Vec3 tip(cgv::math::inv(node->calculate_transform_prev_to_current_without_dofs()).col(3));
+
+
+	ctx.tesselate_arrow(start, tip);
 }
 
 void SkeletonViewer::timer_event(double, double dt)
