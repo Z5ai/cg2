@@ -55,7 +55,13 @@ Mat4 Bone::calculate_transform_prev_to_current_with_dofs()
 	////
 	// Task 4.1: Implement matrix calculation
 
-	Mat4 t;
+    Mat4 dofMatrix;
+    dofMatrix.identity();
+    std::for_each(dofs.begin(), dofs.end(), [&](std::shared_ptr<AtomicTransform> t) {
+        dofMatrix = dofMatrix * t->calculate_matrix();
+    });
+    Mat4 t;
+    t = orientationTransformPrevJointToCurrent * dofMatrix * translationTransformCurrentJointToNext;
 	return t;
 }
 
