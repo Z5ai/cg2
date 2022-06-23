@@ -34,46 +34,34 @@ void SkeletonViewer::draw_skeleton_subtree(Bone* node, const Mat4& global_to_par
 	////
 	// Task 4.2, 4.3: Visualize the skeleton
 
-
-
 	//DRAWING CODE
 	cgv::render::shader_program& default_shader = ctx.ref_surface_shader_program();
-
-	// Used to pass reflectance information to shaders for coloring the cubes
-	cgv::media::illum::surface_material material;
-
-	cgv::media::color<float, cgv::media::HLS> color;
-	cgv::media::color<float, cgv::media::RGB> colorRGB;
-
-	//cgv::media::color<float, cgv::media::HLS> color_next(color);
-	for (int i = 0; i < level; i++)
-	{
-		color.H() = std::fmod(color.H() + 0.2f, 1.0f);
-		color.S() = std::fmod(color.S() - 0.05f, 1.0f);
-
-
-		colorRGB.R() = (float) 10 * level / 255;
-	}
-
-	//cube_color.R() = (float)1 / level + 1;
-	//cube_color.G() = (float)1 / level + 1;
-	//cube_color.B() = (float)1 / level + 1;
-
-	material.set_diffuse_reflectance(color);
-	//ctx.set_material(material);
-
-	ctx.set_color(colorRGB);
 
 	// Enable shader program we want to use for drawing
 	default_shader.enable(ctx);
 
+	// Used to pass reflectance information to shaders for coloring 
+	cgv::media::illum::surface_material material;
 
+	cgv::media::color<float> colorRGB;
+
+	colorRGB.R() = 245/255;
+	colorRGB.G() = 158/255;
+	colorRGB.B() = 66/255;
+
+	for (int i = 0; i < level; i++)
+	{
+		colorRGB.R() = std::fmod(colorRGB.R() - 0.5f, 1.0f);
+		colorRGB.B() = std::fmod(colorRGB.B() + 0.2f, 1.0f);
+		colorRGB.G() = std::fmod(colorRGB.G() + 0.4f, 1.0f);
+	}
 
 	//SKELETON CODE
 	Vec4 m_origin(0,0,0,1);
 	Vec4 base = global_to_parent_local * m_origin;
 
-	Vec4 tip = global_to_parent_local * node->calculate_transform_prev_to_current_without_dofs() * m_origin;
+	//Vec4 tip = global_to_parent_local * node->calculate_transform_prev_to_current_without_dofs() * m_origin;
+	Vec4 tip = global_to_parent_local * node->calculate_transform_prev_to_current_with_dofs() * m_origin;
 	//Vec4 tip = node->get_bone_local_tip_position();
 
 
@@ -83,9 +71,12 @@ void SkeletonViewer::draw_skeleton_subtree(Bone* node, const Mat4& global_to_par
 	std::cout << global_to_parent_local << "\n";
 	std::cout << node->calculate_transform_prev_to_current_without_dofs() << "\n";*/
 
-	
+	// Render the cube
+	material.set_diffuse_reflectance(colorRGB);
+	ctx.set_material(material);
 
 	ctx.tesselate_arrow((Vec3)base, (Vec3)tip);
+
 
 	default_shader.disable(ctx);
 

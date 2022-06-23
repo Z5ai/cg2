@@ -39,7 +39,7 @@ void Bone::calculate_matrices()
 
     translationTransformCurrentJointToNext.identity();
     Vec4 translationVector;
-    translationVector.set(length*direction_in_world_space.x(),length*direction_in_world_space.y(), length*direction_in_world_space.z(),1);
+    translationVector.set(length*direction_in_world_space.x(), length*direction_in_world_space.y(), length*direction_in_world_space.z(), 1);
     translationTransformCurrentJointToNext.set_col(3, translationVector);
 
 	if (this->get_parent() != NULL)
@@ -47,8 +47,8 @@ void Bone::calculate_matrices()
 	else
 		orientationTransformPrevJointToCurrent.identity();
 
-	std::cout << translationTransformCurrentJointToNext << "\n";
-	std::cout << orientationTransformPrevJointToCurrent << "\n";
+	//std::cout << translationTransformCurrentJointToNext << "\n";
+	//std::cout << orientationTransformPrevJointToCurrent << "\n";
 
 	////
 	// Task 5.6: Implement matrix calculation (skinning)
