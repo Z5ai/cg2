@@ -325,30 +325,56 @@ void Skeleton::read_pinocchio_file(std::string filename)
 	if (o)
 	{
 
-
         std::string l;
-        std::getline(o, l);
+
+		std::vector<std::tuple<int, Vec3, int>> bonesDoc;
 
         while (std::getline(o, l))
         {
-            std::istringstream iss(l);
-            float x, y, z;
-            int boneID;
-            int parentID;
-            char e;
-            if (!(iss >> boneID >> e >> x >> e >> y >> e >> z >> parentID) && e == ' ') { break; }
-            // update bone length and bone direction
-            for (auto iter = bones.begin(); iter != bones.end(); iter++){
-                iter->second->set_length(...);
-                iter->second->set_direction_in_world_space(...);
-            }
-            // update the (rest pose) bounding box of the skeleton
-            reset_bounding_box();
-            add_point();......
-            // adjust the orientation transform from the global to the local bone coordinate system such that the local bone direction remains unchanged
-            Bone::add_axis_rotation();
+			if (l.length() == 0)
+				continue;
+			else
+			{
+
+				std::stringstream ss(l);
+				std::tuple<int, Vec3, int> boneToAdd;
+				float x, y, z;
+				int boneID;
+				int parentID;
+
+				ss >> boneID >> x >> y >> z >> parentID;
+
+				std::get<0>(boneToAdd) = boneID;
+				std::get<2>(boneToAdd) = parentID;
+				std::get<1>(boneToAdd)[0] = x;
+				std::get<1>(boneToAdd)[1] = y;
+				std::get<1>(boneToAdd)[2] = z;
+
+				bonesDoc.emplace_back(boneToAdd);
+			
+			}
         }
 
+        // update bone length and bone direction
+
+		int index = 1;
+        for (auto iter = bones.begin(); iter != bones.end(); iter++){
+			if (iter->second != nullptr) {
+
+				if (iter->second->get_parent() != nullptr) {
+
+					Vec3 dist = std::get<1>(bonesDoc[index]) - std::get<1>(bonesDoc[std::get<2>(bonesDoc[index])]);
+					iter->second->set_length(dist.length());
+					iter->second->set_direction_in_world_space(cgv::math::normalize(dist));
+
+
+					index++;
+				}
+			}
+
+
+        }
+        reset_bounding_box();
 
 		/*Task 5.3: Read Pinocchio o */
 	}
