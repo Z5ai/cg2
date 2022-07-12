@@ -324,7 +324,24 @@ void Skeleton::read_pinocchio_file(std::string filename)
 #endif
 	if (o)
 	{
-		/*Task 5.3: Read Pinocchio file */
+
+
+        std::string l;
+        std::getline(o, l);
+
+        while (std::getline(o, l))
+        {
+            std::istringstream iss(l);
+            float x, y, z;
+            int boneID;
+            int parentID;
+            char e;
+            if (!(iss >> boneID >> e >> x >> e >> y >> e >> z >> parentID) && e == ' ') { break; }
+            // update bone length and bone direction
+        }
+
+
+		/*Task 5.3: Read Pinocchio o */
 	}
 
 	o.close();
