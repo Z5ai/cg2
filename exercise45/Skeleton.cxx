@@ -281,19 +281,16 @@ void Skeleton::write_pinocchio_file(const std::string& filename)
 			Vec3 max = Skeleton::IHasBoundingBox::getMax();
 			Vec3 min = Skeleton::IHasBoundingBox::getMin();
 
-			float offset = origin.y() - min.y();
-			max.y() += offset;
 
+			float offset = origin.y() - min.y();
+			
+			max += offset;
+			
 			float fact = 1 / cgv::math::max_value(max);
-			//float fact = 1/ (get)
 
 			position.y() = position.y() + offset;
 			position = position * fact;
 
-
-
-			//int index = (iter - bone_global_positions.begin());
-			
 			auto boneInMap = bones.find(bone->get_name());
 			int boneInMapIndex = std::distance(bones.begin(), boneInMap);
 
@@ -302,6 +299,11 @@ void Skeleton::write_pinocchio_file(const std::string& filename)
 				int parentBoneInMapIndex = std::distance(bones.begin(), parentBoneInMap);
 
 				o << boneInMapIndex << ' ' << position.x() << ' ' << position.y() << ' ' << position.z() << ' ' << parentBoneInMapIndex << '\n';
+			}
+			else
+			{
+
+				o << boneInMapIndex << ' ' << position.x() << ' ' << position.y() << ' ' << position.z() << ' ' << "-1" << '\n';
 			}
 		}
 
