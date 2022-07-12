@@ -338,6 +338,15 @@ void Skeleton::read_pinocchio_file(std::string filename)
             char e;
             if (!(iss >> boneID >> e >> x >> e >> y >> e >> z >> parentID) && e == ' ') { break; }
             // update bone length and bone direction
+            for (auto iter = bones.begin(); iter != bones.end(); iter++){
+                iter->second->set_length(...);
+                iter->second->set_direction_in_world_space(...);
+            }
+            // update the (rest pose) bounding box of the skeleton
+            reset_bounding_box();
+            add_point();......
+            // adjust the orientation transform from the global to the local bone coordinate system such that the local bone direction remains unchanged
+            Bone::add_axis_rotation();
         }
 
 
