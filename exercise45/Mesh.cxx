@@ -149,6 +149,39 @@ void Mesh::read_attachment(std::string filename)
 	while (std::getline(f, line))
 	{
 		/*Task 5.5: Load pinocchio attachment */
+		if (line.length() == 0)
+			continue;
+		else {
+			std::stringstream ss(line);
+
+			int currentBoneID = 0;
+			ivec4 boneIDs; //Bone IDs of the current vertex
+			Vec4 weights;
+			while (ss) {
+				//go through each column and read weight of bone
+				float currentVal;
+				ss >> currentVal;
+				currentBoneID++;
+
+				if (currentVal > 0) {
+					//replace smallest weight
+					int minIndex = cgv::math::min_index(weights);
+					if (currentVal > weights[minIndex])
+						weights[minIndex] = currentVal;
+
+					boneIDs[minIndex] = currentBoneID;
+
+				}
+
+			}
+			weights.normalize();
+			bone_indices.emplace_back(boneIDs);
+			bone_weights.emplace_back(weights);
+
+		}
+			
+
+
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, boneIndexBuffer);
