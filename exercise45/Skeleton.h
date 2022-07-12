@@ -46,7 +46,7 @@ private:
 	Bone* root;
 	void postprocess(Bone* node, const Vec3& global_position);
 
-	
+	std::vector<std::pair<Bone*, Vec3>> bone_global_positions;
 	
 	
 

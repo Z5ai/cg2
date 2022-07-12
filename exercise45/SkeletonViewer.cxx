@@ -34,6 +34,7 @@ void SkeletonViewer::draw_skeleton_subtree(Bone* node, const Mat4& global_to_par
 	auto global_to_current_local = global_to_parent_local * node->calculate_transform_prev_to_current_with_dofs();
 	auto my_root_position = global_to_current_local * node->get_bone_local_root_position();
 	auto my_tip_position = global_to_current_local * node->get_bone_local_tip_position();
+
 	if (arrows)
 	{
 		static const cgv::media::illum::surface_material::color_type colors[] =
@@ -51,15 +52,21 @@ void SkeletonViewer::draw_skeleton_subtree(Bone* node, const Mat4& global_to_par
 		ctx.set_material(material);
 
 		ctx.ref_surface_shader_program().enable(ctx);
+
 		cgv::render::render_types::dvec3
 			aRoot(my_root_position.x(), my_root_position.y(), my_root_position.z()),
 			aTip(my_tip_position.x(), my_tip_position.y(), my_tip_position.z());
+
 		if ((aTip-aRoot).length() > std::numeric_limits<double>::epsilon())
 			ctx.tesselate_arrow(aRoot, aTip, 0.1, 2.0, 0.5);
+
 		ctx.ref_surface_shader_program().disable(ctx);
 	}
+	
 	Mat4 dof_matrix = global_to_parent_local * node->calculate_transform_prev_to_current_without_dofs();
+	
 	float indicatorSize = (data->get_skeleton()->getMax()-data->get_skeleton()->getMin()).length() * 0.03125f;
+
 	//draw indicators for dofs
 	if (indicators)
 	{

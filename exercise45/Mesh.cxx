@@ -174,6 +174,7 @@ void Mesh::read_attachment(std::string filename)
 				}
 
 			}
+			//Normalize weights and put them in the list
 			weights.normalize();
 			bone_indices.emplace_back(boneIDs);
 			bone_weights.emplace_back(weights);

@@ -248,6 +248,9 @@ void Skeleton::postprocess(Bone* node, const Vec3& global_position)
 	auto bone_tip_in_global_system = global_position + bone_offset_in_global_system;
 	add_point(bone_tip_in_global_system);
 
+	//Added for 5.1
+	bone_global_positions.emplace_back(node, bone_tip_in_global_system);
+
 	node->calculate_matrices();
 	int n = node->childCount();
 	for (int i = 0; i < n; ++i)
@@ -269,6 +272,39 @@ void Skeleton::write_pinocchio_file(const std::string& filename)
 	if (o)
 	{
 		/*Task 5.1: Write Pinocchio file into o */
+		for (auto iter = bone_global_positions.begin(); iter != bone_global_positions.end(); iter++)
+		{
+			auto bone = iter->first;
+			auto position = iter->second;
+			
+
+			Vec3 max = Skeleton::IHasBoundingBox::getMax();
+			Vec3 min = Skeleton::IHasBoundingBox::getMin();
+
+			float offset = origin.y() - min.y();
+			max.y() += offset;
+
+			float fact = 1 / cgv::math::max_value(max);
+			//float fact = 1/ (get)
+
+			position.y() = position.y() + offset;
+			position = position * fact;
+
+
+
+			//int index = (iter - bone_global_positions.begin());
+			
+			auto boneInMap = bones.find(bone->get_name());
+			int boneInMapIndex = std::distance(bones.begin(), boneInMap);
+
+			if (bone->get_parent() != nullptr) {
+				auto parentBoneInMap = bones.find(bone->get_parent()->get_name());
+				int parentBoneInMapIndex = std::distance(bones.begin(), parentBoneInMap);
+
+				o << boneInMapIndex << ' ' << position.x() << ' ' << position.y() << ' ' << position.z() << ' ' << parentBoneInMapIndex << '\n';
+			}
+		}
+
 	}
 	o.close();
 }
